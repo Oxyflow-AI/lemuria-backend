@@ -24,8 +24,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install Node.js dependencies
-RUN npm ci --only=production
+# Install Node.js dependencies (including dev dependencies for building)
+RUN npm ci
 
 # Copy application code
 COPY . .
