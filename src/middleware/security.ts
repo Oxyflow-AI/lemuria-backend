@@ -13,26 +13,11 @@ export const securityMiddleware = helmet({
   }
 });
 
-const rawOrigins = process.env.ALLOWED_ORIGINS || '';
-const allowedOrigins = rawOrigins
-  .split(',')
-  .map(origin => origin.trim())
-  .filter(Boolean); // removes empty strings
-
 export const corsMiddleware = cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      console.warn('Blocked by CORS:', origin);
-      return callback(new Error(`CORS: Origin ${origin} not allowed`));
-    }
-  },
-  credentials: true,
+  origin: '*', // 💥 Allow all origins
+  credentials: false, // ❌ Must be false when using origin: '*'
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 });
 
 export const rateLimitMiddleware = rateLimit({
