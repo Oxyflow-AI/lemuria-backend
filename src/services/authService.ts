@@ -43,7 +43,7 @@ export class AuthService extends BaseService {
           data: {
             full_name: signUpData.full_name
           },
-          emailRedirectTo: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/email-verification?email=${encodeURIComponent(signUpData.email)}`
+          emailRedirectTo: `${process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.BACKEND_URL}/email-verification?email=${encodeURIComponent(signUpData.email)}`
         }
       });
 
