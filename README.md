@@ -50,7 +50,7 @@ Create a `.env` file in the root directory:
 ```env
 # Server Configuration
 NODE_ENV=development
-PORT=3000
+PORT_NO=3000
 FRONTEND_URL=http://localhost:3000
 
 # Supabase Configuration
@@ -284,7 +284,7 @@ Ensure all required environment variables are set:
 - `SUPABASE_SERVICE_ROLE_KEY` - Supabase service role key
 - `FRONTEND_URL` - Frontend application URL
 - `NODE_ENV` - production/development
-- `PORT` - Server port (default: 3000)
+- `PORT_NO` - Server port (default: 3000)
 
 ### Build Process
 
