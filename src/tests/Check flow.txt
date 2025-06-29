@@ -1,0 +1,43 @@
+// Server restart and live check
+Rebuild the server.
+Restart the server.
+Check the heath endpoint.
+
+// Authentication flow with email
+Try sign in with oxyflowai@gmail.com, password123# --> Should prompt invalid email or password
+Try sign up a new user with email password (oxyflowai@gmail.com, password123*)
+Try sign in before email verification with correct password --> Should prompt for email verification
+Try sign in before email verification with wrong password --> Should prompt for email verification, not invalid email or password
+Try sign up with same email and any password (oxyflowai@gmail.com, password123#) --> Should generate a new email verification, not account already exists
+Wait for manual email verification
+Try sign in with old/wrong password (password123*) --> Should prompt invalid email or password
+Try sign in with correct credentials (oxyflowai@gmail.com, password123*) --> Should get the token
+
+// Account settings
+Set the astrology system as VEDIC and preferred_language as TAMIL
+Check if account_settings table has (astrology_system: VEDIC, preferred_language: TAMIL, primary_profile: NULL)
+
+// Primary profile creation
+Create a profile (Name: Vishal K, Gender: MALE, date_of_birth: 02-08-2004, time_of_birth: 8.30AM, place_of_birth: Coimbatore India)
+Check if profile is created with (Rasi: Kumbha, Nakshatra: Dhanishta)
+Check account_settings if (primary_profile_id: <created profile id>)
+
+// Another profile creation
+Create a new profile (Name: Dhanwanth, Gender: MALE, Rasi: Mithuna, Nakshatra: Mirgamashira)
+Check if the profile has been created with the same details
+Set the account_settings primary_profile_id to dhanwanth profile.
+Check if account_settings updated
+
+// Chat
+Test gemini with 3 basic questions one by one
+Check if chat history gets updated
+Delete one of the user messages and one of the bot messages
+Check if chat history gets modified correspondingly
+
+// Delete primary profile
+Delete profile Dhanwanth
+Ensure profile is not showing up in further requests
+Check if primary profile has been updated to Vishal.
+
+// Sign out
+Sign out of the account and test if the JWT can be used for any other requests
