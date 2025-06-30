@@ -33,7 +33,7 @@ COPY . .
 # Create scripts directory and make Python script executable
 RUN chmod +x scripts/kerykeion_calculator.py
 
-# Build TypeScript
+# Build TypeScript and copy static assets
 RUN npm run build
 
 # Expose port

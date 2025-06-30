@@ -54,7 +54,7 @@ app.get('/auth/callback', (req, res) => {
 
 // Email verification page
 app.get('/email-verification', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates/email-verification.html'));
+  res.sendFile(path.resolve(__dirname, 'templates', 'email-verification.html'));
 });
 
 // Routes
@@ -72,6 +72,7 @@ app.use('*', (req, res) => {
 // Global error handler (must be last)
 app.use((error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   handleError(error, res, `${req.method} ${req.originalUrl}`);
+  next();
 });
 
 export { app };
