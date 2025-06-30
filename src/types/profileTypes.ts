@@ -59,6 +59,8 @@ export interface UpdateProfileDto {
   vedic_rasi?: string;
   vedic_nakshatra?: string;
   vedic_lagna?: string;
+  // Flag to trigger astrology calculation during update
+  calculate_astrology?: boolean;
 }
 
 export interface ProfileResponseDto extends Profile {

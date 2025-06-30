@@ -186,11 +186,15 @@ export class ProfileService extends BaseService {
     await this.validateResourceOwnership('profiles', profileId, userId, 'profile_id');
 
     // Check if birth details are being updated to recalculate astrology
-    const shouldRecalculateAstrology = updateData.date_of_birth || 
+    // or if calculate_astrology flag is explicitly set to true
+    const shouldRecalculateAstrology = updateData.calculate_astrology || 
+                                     updateData.date_of_birth || 
                                      updateData.time_of_birth || 
                                      updateData.place_of_birth;
 
-    let finalUpdateData = { ...updateData };
+    // Remove calculate_astrology from update data as it's not a database field
+    const { calculate_astrology, ...dataWithoutFlag } = updateData;
+    let finalUpdateData = { ...dataWithoutFlag };
 
     if (shouldRecalculateAstrology) {
       // Get current profile data to merge with updates
